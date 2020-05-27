@@ -13,14 +13,15 @@ cc.Class({
     },
 
     onLoad() {
+        this.newArrow();
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
         this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
-        this.newArrow();
     },
 
-    onTouchStart() {
-
+    onTouchStart(event) {
+        console.log(event.getLocation());
+        this.arrowJs.updateArrowRotate();
     },
 
     onTouchMove() {
@@ -35,6 +36,7 @@ cc.Class({
         let arrowNode = cc.instantiate(this.arrowPrefab);
         this.node.addChild(arrowNode);
         arrowNode.setPosition(cc.v2(-300, -200));
+        this.arrowJs = arrowNode.getComponent('arrow');
     }
 
     // start () {},
