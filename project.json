@@ -1,0 +1,9 @@
+{
+  "engine": "cocos-creator-js",
+  "packages": "packages",
+  "name": "Hello",
+  "uuid": "0cd40e62-9210-4831-970e-d51c904473c9",
+  "version": "2.3.3",
+  "id": "756ea95e-a7b8-474c-9385-89712549231d",
+  "isNew": false
+}
