@@ -21,8 +21,11 @@ cc.Class({
     },
 
     //onLoad之后，第一次update之前执行
-    start () {
+    start() {
         this.newArrow();
+        this.schedule(function () {
+            this.newTarget();
+        }, 2);
     },
 
     onTouchStart(event) {
@@ -34,15 +37,29 @@ cc.Class({
     },
 
     onTouchEnd() {
-        this.arrowJs.arrowShoot();
+        if (this.arrowJs) {
+            this.arrowJs.arrowShoot();
+            this.arrowJs = null;
+        }
+        this.scheduleOnce(function () {
+            this.newArrow();
+        }, 0.5);
     },
 
+    //生成新箭头
     newArrow() {
         let arrowNode = cc.instantiate(this.arrowPrefab);
         this.node.addChild(arrowNode);
-        arrowNode.setPosition(cc.v2(-300, -200));
+        arrowNode.setPosition(cc.v2(-400, -200));
         this.arrowJs = arrowNode.getComponent('arrow');
-    }
+    },
+
+    //生成新标靶
+    newTarget() {
+        let targetNode = cc.instantiate(this.targetPrefab);
+        this.node.addChild(targetNode);
+        targetNode.setPosition(cc.v2(300, -300));
+    },
 
     // update (dt) {},
 });
