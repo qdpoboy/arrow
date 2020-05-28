@@ -13,23 +13,28 @@ cc.Class({
     },
 
     onLoad() {
-        this.newArrow();
+        this.physics = cc.director.getPhysicsManager();
+        this.physics.enabled = true;
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
         this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
         this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
     },
 
-    onTouchStart(event) {
-        console.log(event.getLocation());
-        this.arrowJs.updateArrowRotate();
+    //onLoad之后，第一次update之前执行
+    start () {
+        this.newArrow();
     },
 
-    onTouchMove() {
+    onTouchStart(event) {
+        this.arrowJs.updateArrowAngle(event.getLocation());
+    },
 
+    onTouchMove(event) {
+        this.arrowJs.updateArrowAngle(event.getLocation());
     },
 
     onTouchEnd() {
-
+        this.arrowJs.arrowShoot();
     },
 
     newArrow() {
@@ -38,8 +43,6 @@ cc.Class({
         arrowNode.setPosition(cc.v2(-300, -200));
         this.arrowJs = arrowNode.getComponent('arrow');
     }
-
-    // start () {},
 
     // update (dt) {},
 });
