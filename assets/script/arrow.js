@@ -18,9 +18,7 @@ cc.Class({
         //向量减法，并返回新结果。
         posWorld = touchPosWorld.sub(this.node.position);
         //归一化向量
-        console.log(posWorld);
         this.direction = posWorld.normalize();
-        console.log(this.direction);
         //将方向向量转换为弧度，signAngle方法返回带方向(有负号)的夹角弧度，angle方法返回不带方向的夹角弧度
         //方向向量转换为角度，需要认清一个隐含变量，就是这个角度的基准是 X 轴正方向。 使用向量来表示就是 (1,0)。
         let radian = posWorld.signAngle(cc.v2(1, 0));
